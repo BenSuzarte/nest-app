@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity({ name: "mails" })
 export class MailEntity {
@@ -6,11 +6,20 @@ export class MailEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ name: "destination_name", nullable: false })
+  destinationName: string;
+
   @Column({ name: "destination_address", nullable: false })
   destinationAddress: string;
 
   @Column({ name: "due_date", type: "timestamp", nullable: false })
   dueDate: string;
+
+  @Column({ type: "text", nullable: false })
+  subject: string
+
+  @Column({ type: "text", nullable: false })
+  body: string
 
   @Column()
   status: string;
@@ -18,10 +27,10 @@ export class MailEntity {
   @CreateDateColumn({ name: "created_at" })
   createdAt: string;
 
-  @CreateDateColumn({ name: "updated_at" })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: string;
 
-  @CreateDateColumn({ name: "deleted_at" })
+  @DeleteDateColumn({ name: "deleted_at" })
   deletedAt: string;
 
 }

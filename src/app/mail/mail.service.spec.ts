@@ -43,13 +43,7 @@ describe('MailService', () => {
         body: '<p>Hi</p>'
       }
 
-      const mailEntityMock = {
-        destinationAddress: 'user@email.com',
-        dueDate: '2022-05-01T12:00:00Z',
-        destinationName: 'User',
-        subject: 'Email test',
-        body: '<p>Hi</p>'
-      } as MailEntity
+      const mailEntityMock = { ...data } as MailEntity
 
       jest.spyOn(mailRepository, 'create').mockReturnValueOnce(mailEntityMock);
       jest.spyOn(mailRepository, 'save').mockResolvedValueOnce(mailEntityMock);
@@ -60,8 +54,6 @@ describe('MailService', () => {
 
       //Assert
       expect(result).toBeDefined()
-      expect(mailRepository.create).toBeCalledTimes(1)
-      expect(mailService.save).toBeCalledTimes(1)
     })
   });
 

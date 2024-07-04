@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { MailStatusEnum } from "./enum/mail-status.enum";
 
 @Entity({ name: "mails" })
 export class MailEntity {
@@ -21,7 +22,7 @@ export class MailEntity {
   @Column({ type: "text", nullable: false })
   body: string
 
-  @Column()
+  @Column({ default: MailStatusEnum.WAITING })
   status: string;
 
   @CreateDateColumn({ name: "created_at" })
